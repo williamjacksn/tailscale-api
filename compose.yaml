@@ -1,0 +1,9 @@
+services:
+  shell:
+    entrypoint:
+      - /bin/sh
+    image: ghcr.io/williamjacksn/tailscale-api
+    init: true
+    volumes:
+      - ./:/home/python/tailscale-api
+    working_dir: /home/python/tailscale-api
