@@ -38,7 +38,7 @@ devices:
 
 * have a Tailscale software update available
 * have a machine key that will expire within 15 days
-* have a machin key that has already expired
+* have a machine key that has already expired
 
 This script is only provided as an example. If you want to use the script as it is written, you
 will need to provide Tailscale OAuth information and SMTP server credentials using environment
