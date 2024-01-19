@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: tailscale-check-devices
     steps:
+
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
       - name: Check devices
         env:
           SMTP_FROM: ${{ vars.smtp_from }}
