@@ -1,5 +1,32 @@
-class TailscaleAPIClient:
-    base_url = 'https://api.tailscale.com/api/v2'
+import requests
 
-    def __init__(self, api_key: str) -> None:
-        self.api_key = api_key
+class TailscaleAPIClient:
+    base_url: str = 'https://api.tailscale.com/api/v2'
+    client_id: str = None
+    client_secret: str = None
+    session: requests.Session = requests.session()
+
+    def devices(self):
+        url = f'{self.base_url}/tailnet/-/devices'
+        response = self.session.get(url)
+        response.raise_for_status()
+        return response.json().get('devices')
+
+    def get_oauth_token(self) -> str:
+        url = f'{self.base_url}/oauth/token'
+        data = {
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+        }
+        response = self.session.post(url, data)
+        response.raise_for_status()
+        return response.json().get('access_token')
+
+    def set_oauth_client_info(self, client_id: str, client_secret: str):
+        self.client_id = client_id
+        self.client_secret = client_secret
+
+    def set_token(self, token: str):
+        self.session.headers.update({
+            'Authorization': f'Bearer {token}',
+        })
