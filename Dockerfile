@@ -17,3 +17,6 @@ LABEL org.opencontainers.image.authors="William Jackson <william@subtlecoolness.
       org.opencontainers.image.source="https://github.com/williamjacksn/tailscale-api"
 
 ENTRYPOINT ["/home/python/venv/bin/python"]
+
+COPY --chown=python:python check-devices.py /home/python/tailscale-api/check-devices.py
+COPY --chown=python:python tailscale.py /home/python/tailscale-api/tailscale.py
