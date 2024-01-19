@@ -1,4 +1,20 @@
 services:
+  check-devices:
+    entrypoint:
+      - /home/python/venv/bin/python
+      - /home/python/tailscale-api/check-devices.py
+    environment:
+      SMTP_FROM:
+      SMTP_PASSWORD:
+      SMTP_SERVER:
+      SMTP_TO:
+      SMTP_USERNAME:
+      TS_CLIENT_ID:
+      TS_CLIENT_SECRET:
+    image: ghcr.io/williamjacksn/tailscale-api
+    init: true
+    working_dir: /home/python/tailscale-api
+
   shell:
     entrypoint:
       - /bin/sh
