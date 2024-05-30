@@ -23,3 +23,7 @@ services:
     volumes:
       - ./:/home/python/tailscale-api
     working_dir: /home/python/tailscale-api
+
+  tailscale-api:
+    build: .
+    image: ghcr.io/williamjacksn/tailscale-api
