@@ -1,10 +1,10 @@
-import requests
+import httpx
 
 class TailscaleAPIClient:
     base_url: str = 'https://api.tailscale.com/api/v2'
     client_id: str = None
     client_secret: str = None
-    session: requests.Session = requests.session()
+    session: httpx.Client = httpx.Client()
 
     def devices(self):
         url = f'{self.base_url}/tailnet/-/devices'
@@ -18,7 +18,7 @@ class TailscaleAPIClient:
             'client_id': self.client_id,
             'client_secret': self.client_secret,
         }
-        response = self.session.post(url, data)
+        response = self.session.post(url, data=data)
         response.raise_for_status()
         return response.json().get('access_token')
 
