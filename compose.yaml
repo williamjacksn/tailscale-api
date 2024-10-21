@@ -15,6 +15,15 @@ services:
     init: true
     working_dir: /home/python/tailscale-api
 
+  pip-compile:
+    entrypoint:
+      - /home/python/venv/bin/pip-compile
+    image: ghcr.io/williamjacksn/pip-tools:py3.12
+    init: true
+    volumes:
+      - ./:/home/python/tailscale-api
+    working_dir: /home/python/tailscale-api
+
   shell:
     entrypoint:
       - /bin/sh
