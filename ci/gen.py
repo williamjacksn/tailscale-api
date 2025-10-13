@@ -32,7 +32,7 @@ def gen_dependabot() -> None:
     gen(content, target)
 
 
-def gen_workflow_check_devices():
+def gen_workflow_check_devices() -> None:
     target = ".github/workflows/check-devices.yaml"
     content = {
         "env": {
@@ -131,7 +131,7 @@ def gen_workflow_ruff() -> None:
     gen(content, target)
 
 
-def main():
+def main() -> None:
     gen_dependabot()
     gen_workflow_check_devices()
     gen_workflow_publish()
