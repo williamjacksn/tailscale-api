@@ -6,15 +6,16 @@ This repository contains tools for working with the [Tailscale API][a].
 
 ### Contents
 
-**`tailscale.py`**
+**`tailscale_api`**
 
-This module provides the `TailscaleAPIClient` object for working with the API. You can authenticate
-with the API using either an API access token or an OAuth client ID and secret.
+This module provides the `TailscaleAPIClient` object for working with the API. You can
+authenticate with the API using either an API access token or an OAuth client ID and
+secret.
 
 ```python
-import tailscale
+import tailscale_api
 
-tsc = tailscale.TailscaleAPIClient()
+tsc = tailscale_api.TailscaleAPIClient()
 
 # authenticate with an access token
 token = 'tskey-api-...'
@@ -31,15 +32,15 @@ for device in tsc.devices():
     print(device.get('name'))
 ```
 
-**`check-devices.py`**
+**`examples/check-devices.py`**
 
-This script will check all devices in a Tailscale network, and send a notification email if any
-devices:
+This script will check all devices in a Tailscale network, and send a notification email
+if any devices:
 
 * have a Tailscale software update available
 * have a machine key that will expire within 15 days
 * have a machine key that has already expired
 
-This script is only provided as an example. If you want to use the script as it is written, you
-will need to provide Tailscale OAuth information and SMTP server credentials using environment
-variables.
+This script is only provided as an example. If you want to use the script as it is
+written, you will need to provide Tailscale OAuth information and SMTP server
+credentials using environment variables.
