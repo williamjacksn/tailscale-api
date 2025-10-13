@@ -4,9 +4,14 @@ version = "2025.0"
 description = "Tools for working with the Tailscale API"
 readme = "README.md"
 requires-python = ">=3.13"
+license = "MIT"
 dependencies = [
     "httpx>=0.28.1",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/williamjacksn/tailscale-api"
+"Issues" = "https://github.com/williamjacksn/tailscale-api/issues"
 
 [build-system]
 build-backend = "uv_build"
