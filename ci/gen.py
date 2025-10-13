@@ -2,6 +2,7 @@ import json
 import pathlib
 
 ACTIONS_CHECKOUT = {"name": "Check out repository", "uses": "actions/checkout@v5"}
+DEFAULT_BRANCH = "main"
 THIS_FILE = pathlib.PurePosixPath(
     pathlib.Path(__file__).relative_to(pathlib.Path.cwd())
 )
@@ -79,9 +80,44 @@ def gen_workflow_publish() -> None:
     gen(content, target)
 
 
+def gen_workflow_ruff() -> None:
+    target = ".github/workflows/ruff.yaml"
+    content = {
+        "name": "Ruff",
+        "on": {
+            "pull_request": {"branches": [DEFAULT_BRANCH]},
+            "push": {"branches": [DEFAULT_BRANCH]},
+        },
+        "permissions": {"contents": "read"},
+        "env": {
+            "description": f"This workflow ({target}) was generated from {THIS_FILE}"
+        },
+        "jobs": {
+            "ruff-check": {
+                "name": "Run ruff check",
+                "runs-on": "ubuntu-latest",
+                "steps": [
+                    ACTIONS_CHECKOUT,
+                    {"name": "Run ruff check", "run": "sh ci/ruff-check.sh"},
+                ],
+            },
+            "ruff-format": {
+                "name": "Run ruff format",
+                "runs-on": "ubuntu-latest",
+                "steps": [
+                    ACTIONS_CHECKOUT,
+                    {"name": "Run ruff format", "run": "sh ci/ruff-format.sh"},
+                ],
+            },
+        },
+    }
+    gen(content, target)
+
+
 def main():
     gen_workflow_check_devices()
     gen_workflow_publish()
+    gen_workflow_ruff()
 
 
 if __name__ == "__main__":
