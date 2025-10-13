@@ -15,6 +15,23 @@ def gen(content: dict, target: str) -> None:
     )
 
 
+def gen_dependabot() -> None:
+    target = ".github/dependabot.yaml"
+    content = {
+        "version": 2,
+        "updates": [
+            {
+                "package-ecosystem": e,
+                "allow": [{"dependency-type": "all"}],
+                "directory": "/",
+                "schedule": {"interval": "daily"},
+            }
+            for e in ["github-actions", "uv"]
+        ],
+    }
+    gen(content, target)
+
+
 def gen_workflow_check_devices():
     target = ".github/workflows/check-devices.yaml"
     content = {
@@ -115,6 +132,7 @@ def gen_workflow_ruff() -> None:
 
 
 def main():
+    gen_dependabot()
     gen_workflow_check_devices()
     gen_workflow_publish()
     gen_workflow_ruff()
