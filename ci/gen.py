@@ -49,8 +49,39 @@ def gen_workflow_check_devices():
     gen(content, target)
 
 
+def gen_workflow_publish() -> None:
+    target = ".github/workflows/publish.yaml"
+    content = {
+        "env": {
+            "description": f"This workflow ({target}) was generated from {THIS_FILE}"
+        },
+        "name": "Publish to PyPI",
+        "on": {"release": {"types": ["published"]}},
+        "jobs": {
+            "publish": {
+                "name": "Publish to PyPI",
+                "runs-on": "ubuntu-latest",
+                "environment": {
+                    "name": "pypi-release",
+                    "url": "https://pypi.org/p/tailscale-api",
+                },
+                "permissions": {"id-token": "write"},
+                "steps": [
+                    ACTIONS_CHECKOUT,
+                    {
+                        "name": "Build and publish the package",
+                        "run": "sh ci/build-and-publish.sh",
+                    },
+                ],
+            }
+        },
+    }
+    gen(content, target)
+
+
 def main():
     gen_workflow_check_devices()
+    gen_workflow_publish()
 
 
 if __name__ == "__main__":
