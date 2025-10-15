@@ -125,7 +125,7 @@ requires-dist = [{ name = "httpx", specifier = ">=0.28.1" }]
 [package.metadata.requires-dev]
 dev = [
     { name = "ruff", specifier = ">=0.14.0" },
-    { name = "uv-build", specifier = ">=0.9.2" },
+    { name = "uv-build", specifier = ">=0.9.3" },
 ]
 
 [[package]]
