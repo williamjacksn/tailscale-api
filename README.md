@@ -21,7 +21,7 @@ tsc = tailscale_api.TailscaleAPIClient()
 token = 'tskey-api-...'
 tsc.set_token(token)
 for device in tsc.devices():
-    print(device.get('name'))
+    print(device.name)
 
 # authenticate with oauth
 ts_client_id = 'kHJw5W...'
@@ -29,7 +29,7 @@ ts_client_secret = 'tskey-client-...'
 tsc.set_oauth_client_info(ts_client_id, ts_client_secret)
 tsc.set_token(tsc.get_oauth_token())
 for device in tsc.devices():
-    print(device.get('name'))
+    print(device.name)
 ```
 
 **`examples/check-devices.py`**

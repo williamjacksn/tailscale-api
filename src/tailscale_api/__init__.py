@@ -1,5 +1,7 @@
 import httpx
 
+from . import models
+
 
 class TailscaleAPIClient:
     base_url: str = "https://api.tailscale.com/api/v2"
@@ -7,11 +9,11 @@ class TailscaleAPIClient:
     client_secret: str = None
     session: httpx.Client = httpx.Client()
 
-    def devices(self) -> list[dict]:
+    def devices(self) -> list[models.Device]:
         url = f"{self.base_url}/tailnet/-/devices"
         response = self.session.get(url)
         response.raise_for_status()
-        return response.json().get("devices")
+        return [models.Device(d) for d in response.json().get("devices")]
 
     def get_oauth_token(self) -> str:
         url = f"{self.base_url}/oauth/token"

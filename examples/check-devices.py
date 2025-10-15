@@ -16,16 +16,13 @@ now = datetime.datetime.now(tz=datetime.UTC)
 
 alerts = []
 for d in tsc.devices():
-    device_name = d.get("name").split(".")[0]
-    device_expires = datetime.datetime.strptime(
-        d.get("expires"), "%Y-%m-%dT%H:%M:%SZ"
-    ).astimezone(datetime.UTC)
-    if d.get("updateAvailable"):
+    device_name = d.name.split(".")[0]
+    if d.update_available:
         alerts.append(f"A client update is available for {device_name}")
-    if device_expires < now:
+    if d.expires < now:
         alerts.append(f"The key for {device_name} has expired.")
-    elif device_expires < now + datetime.timedelta(days=15):
-        alerts.append(f"The key for {device_name} will expire at {device_expires}")
+    elif d.expires < now + datetime.timedelta(days=15):
+        alerts.append(f"The key for {device_name} will expire at {d.expires}")
 
 for alert in alerts:
     print(alert)
