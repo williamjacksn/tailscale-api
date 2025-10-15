@@ -1,0 +1,15 @@
+### get-token
+POST https://api.tailscale.com/api/v2/oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{client_id}}&client_secret={{client_secret}}
+
+> {% client.global.set("token", response.body.access_token) %}
+
+### list-devices
+GET https://api.tailscale.com/api/v2/tailnet/-/devices
+Authorization: Bearer {{token}}
+
+### get-device
+GET https://api.tailscale.com/api/v2/device/{{device_id}}?fields=all
+Authorization: Bearer {{token}}
