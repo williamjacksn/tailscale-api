@@ -107,7 +107,7 @@ wheels = [
 
 [[package]]
 name = "tailscale-api"
-version = "2025.0"
+version = "2025.1"
 source = { editable = "." }
 dependencies = [
     { name = "httpx" },
