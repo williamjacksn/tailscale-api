@@ -5,8 +5,8 @@ from . import models
 
 class TailscaleAPIClient:
     base_url: str = "https://api.tailscale.com/api/v2"
-    client_id: str = None
-    client_secret: str = None
+    client_id: str
+    client_secret: str
     session: httpx.Client = httpx.Client()
 
     def devices(self) -> list[models.Device]:
