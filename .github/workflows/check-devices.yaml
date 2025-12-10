@@ -1,40 +1,25 @@
-{
-  "env": {
-    "description": "This workflow (.github/workflows/check-devices.yaml) was generated from ci/gen.py"
-  },
-  "jobs": {
-    "check-devices": {
-      "environment": "tailscale-check-devices",
-      "name": "Check devices in the Tailscale network",
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "name": "Check out repository",
-          "uses": "actions/checkout@v5"
-        },
-        {
-          "env": {
-            "SMTP_FROM": "${{ vars.smtp_from }}",
-            "SMTP_PASSWORD": "${{ secrets.smtp_password }}",
-            "SMTP_SERVER": "${{ vars.smtp_server }}",
-            "SMTP_TO": "${{ vars.smtp_to }}",
-            "SMTP_USERNAME": "${{ vars.smtp_username }}",
-            "TS_CLIENT_ID": "${{ vars.ts_client_id }}",
-            "TS_CLIENT_SECRET": "${{ secrets.ts_client_secret }}"
-          },
-          "name": "Check devices",
-          "run": "sh ci/check-devices.sh"
-        }
-      ]
-    }
-  },
-  "name": "Check devices in the Tailscale network",
-  "on": {
-    "schedule": [
-      {
-        "cron": "0 0 * * *"
-      }
-    ],
-    "workflow_dispatch": {}
-  }
-}
+name: Check devices in the Tailscale network
+
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch: { }
+
+jobs:
+  check-devices:
+    environment: tailscale-check-devices
+    name: Check devices in the Tailscale network
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+      - env:
+          SMTP_FROM: ${{ vars.smtp_from }}
+          SMTP_PASSWORD: ${{ secrets.smtp_password }}
+          SMTP_SERVER: ${{ vars.smtp_server }}
+          SMTP_TO: ${{ vars.smtp_to }}
+          SMTP_USERNAME: ${{ vars.smtp_username }}
+          TS_CLIENT_ID: ${{ vars.ts_client_id }}
+          TS_CLIENT_SECRET: ${{ secrets.ts_client_secret }}
+        name: Check devices
+        run: sh ci/check-devices.sh
