@@ -5,8 +5,8 @@ import smtplib
 
 import tailscale_api
 
-ts_client_id = os.getenv("TS_CLIENT_ID")
-ts_client_secret = os.getenv("TS_CLIENT_SECRET")
+ts_client_id = os.getenv("TS_CLIENT_ID", "")
+ts_client_secret = os.getenv("TS_CLIENT_SECRET", "")
 
 tsc = tailscale_api.TailscaleAPIClient()
 tsc.set_oauth_client_info(ts_client_id, ts_client_secret)
@@ -33,6 +33,8 @@ if alerts:
     msg["From"] = os.getenv("SMTP_FROM")
     msg["To"] = os.getenv("SMTP_TO")
     msg.set_content("\n".join(alerts))
-    with smtplib.SMTP_SSL(host=os.getenv("SMTP_SERVER")) as s:
-        s.login(user=os.getenv("SMTP_USERNAME"), password=os.getenv("SMTP_PASSWORD"))
+    with smtplib.SMTP_SSL(host=os.getenv("SMTP_SERVER", "")) as s:
+        s.login(
+            user=os.getenv("SMTP_USERNAME", ""), password=os.getenv("SMTP_PASSWORD", "")
+        )
         s.send_message(msg)

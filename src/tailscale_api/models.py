@@ -1,11 +1,36 @@
 import datetime
 import ipaddress
+from typing import TypedDict
 
 type IPAddress = ipaddress.IPv4Address | ipaddress.IPv6Address
 
 
+class DeviceDict(TypedDict):
+    addresses: list[str]
+    authorized: bool
+    blocksIncomingConnections: bool
+    clientVersion: str
+    connectedToControl: bool
+    created: str
+    expires: str
+    hostname: str
+    id: str
+    isExternal: bool
+    keyExpiryDisabled: bool
+    lastSeen: str
+    machineKey: str
+    name: str
+    nodeId: str
+    nodeKey: str
+    os: str
+    tailnetLockError: str
+    tailnetLockKey: str
+    updateAvailable: bool
+    user: str
+
+
 class Device:
-    def __init__(self, data: dict) -> None:
+    def __init__(self, data: DeviceDict) -> None:
         self.data = data
 
     @property
