@@ -1,6 +1,6 @@
 [project]
 name = "tailscale-api"
-version = "2025.1"
+version = "2026.0"
 description = "Tools for working with the Tailscale API"
 readme = "PYPI_README.md"
 requires-python = ">=3.13"
