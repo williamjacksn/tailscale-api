@@ -24,8 +24,8 @@ requires = ["uv-build>=0.13.5,<0.14.0"]
 [dependency-groups]
 dev = [
     "pypi-attestations>=0.0.30",
-    "ruff>=0.17.1    ",
-    "ty>=0.0.1a33",
+    "ruff>=0.17.1",
+    "ty>=0.0.90",
     "uv-build>=0.13.5",
 ]
 
