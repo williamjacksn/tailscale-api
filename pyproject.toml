@@ -9,6 +9,10 @@ dependencies = [
     "httpx>=0.28.1",
 ]
 
+[[project.authors]]
+name = "William Jackson"
+email = "william@subtlecoolness.com"
+
 [project.urls]
 "Homepage" = "https://github.com/williamjacksn/tailscale-api"
 "Issues" = "https://github.com/williamjacksn/tailscale-api/issues"
