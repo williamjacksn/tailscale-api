@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 import email.message
 import os
 import smtplib
@@ -12,7 +12,7 @@ tsc = tailscale_api.TailscaleAPIClient()
 tsc.set_oauth_client_info(ts_client_id, ts_client_secret)
 tsc.set_token(tsc.get_oauth_token())
 
-now = datetime.datetime.now(tz=datetime.UTC)
+now = dt.datetime.now(tz=dt.UTC)
 
 alerts = []
 for d in tsc.devices():
@@ -21,7 +21,7 @@ for d in tsc.devices():
         alerts.append(f"A client update is available for {device_name}")
     if d.expires < now:
         alerts.append(f"The key for {device_name} has expired.")
-    elif d.expires < now + datetime.timedelta(days=15):
+    elif d.expires < now + dt.timedelta(days=15):
         alerts.append(f"The key for {device_name} will expire at {d.expires}")
 
 for alert in alerts:

@@ -1,4 +1,4 @@
-import datetime
+import datetime as dt
 import ipaddress
 from typing import TypedDict
 
@@ -54,12 +54,12 @@ class Device:
         return self.data.get("connectedToControl")
 
     @property
-    def created(self) -> datetime.datetime:
-        return datetime.datetime.fromisoformat(self.data.get("created"))
+    def created(self) -> dt.datetime:
+        return dt.datetime.fromisoformat(self.data.get("created"))
 
     @property
-    def expires(self) -> datetime.datetime:
-        return datetime.datetime.fromisoformat(self.data.get("expires"))
+    def expires(self) -> dt.datetime:
+        return dt.datetime.fromisoformat(self.data.get("expires"))
 
     @property
     def hostname(self) -> str:
@@ -78,8 +78,8 @@ class Device:
         return self.data.get("keyExpiryDisabled")
 
     @property
-    def last_seen(self) -> datetime.datetime:
-        return datetime.datetime.fromisoformat(self.data.get("lastSeen"))
+    def last_seen(self) -> dt.datetime:
+        return dt.datetime.fromisoformat(self.data.get("lastSeen"))
 
     @property
     def machine_key(self) -> str:
