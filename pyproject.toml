@@ -19,14 +19,14 @@ email = "william@subtlecoolness.com"
 
 [build-system]
 build-backend = "uv_build"
-requires = ["uv-build>=0.9.3,<0.13.0"]
+requires = ["uv-build>=0.13.5,<0.14.0"]
 
 [dependency-groups]
 dev = [
     "pypi-attestations>=0.0.30",
     "ruff>=0.16.5",
     "ty>=0.0.1a33",
-    "uv-build>=0.9.3",
+    "uv-build>=0.13.5",
 ]
 
 [tool.ruff.lint]
